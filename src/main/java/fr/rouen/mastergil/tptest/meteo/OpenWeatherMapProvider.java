@@ -22,14 +22,20 @@ public class OpenWeatherMapProvider implements IWeatherProvider {
 
     @Override
     public List<Prevision> getForecastByCity(String city) {
-        List<Prevision> previsions = new ArrayList<Prevision>();
+        List<Prevision> previsions = new ArrayList<>();
         ClientConfig clientConfig = new DefaultClientConfig();
 
         clientConfig.getFeatures().put(
                 JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
         WebResource webResource = client
-                .resource(URL_BASE).path("forecast/daily?APPID=661608d780618193596c7321268a4717&lang=fr&units=metric&cnt=12&mode=json&q=" + city);
+                .resource(URL_BASE).path("forecast/daily")
+                .queryParam("APPID", "661608d780618193596c7321268a4717")
+                .queryParam("lang", "fr")
+                .queryParam("units", "metrics")
+                .queryParam("cnt", "12")
+                .queryParam("mode", "json")
+                .queryParam("q", city);
         ClientResponse response = webResource.accept("application/json")
                 .type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {

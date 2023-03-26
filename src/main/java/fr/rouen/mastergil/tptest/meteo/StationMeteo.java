@@ -1,8 +1,5 @@
 package fr.rouen.mastergil.tptest.meteo;
 
-import org.codehaus.jettison.json.JSONException;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class StationMeteo {
@@ -14,18 +11,17 @@ public class StationMeteo {
         this.weatherProvider = weatherProvider;
     }
 
-    public static void main(String[] args) throws JSONException {
+    public static void main(String[] args) {
         System.out.println(
                 new StationMeteo(new OpenWeatherMapProvider())
                         .majPrevision("Paris,FR")
         );
     }
 
-    public List<Prevision> majPrevision(String city) throws JSONException {
+    public List<Prevision> majPrevision(String city) {
         if (null == city) {
             throw new IllegalArgumentException("City is not optional");
         }
-        final List<Prevision> previsions = new ArrayList<Prevision>();
 
         return weatherProvider.getForecastByCity(city);
     }

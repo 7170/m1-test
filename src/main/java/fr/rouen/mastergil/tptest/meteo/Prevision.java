@@ -63,4 +63,16 @@ public class Prevision {
         this.description = description;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Prevision{" +
+                "date=" + date +
+                ", tempMin=" + tempMin +
+                ", tempMax=" + tempMax +
+                ", tempDay=" + tempDay +
+                ", tempNight=" + tempNight +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
